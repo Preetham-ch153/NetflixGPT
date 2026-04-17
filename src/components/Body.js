@@ -57,7 +57,7 @@ const Body = () => {
           }}>Top Rated Restaurants
           </button>
           <label className="font-bold">UserName : </label>
-          <input  type="text" className="border border-black" value={loggedInUser} 
+          <input  type="text" className="border border-black px-2" value={loggedInUser} 
           onChange={(e)=>setUserName(e.target.value)}/>
           
           </div>
