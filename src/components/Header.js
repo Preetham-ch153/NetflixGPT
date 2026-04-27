@@ -1,38 +1,33 @@
-import {CDN_URL} from "./utils/constants";
-import {useState,useContext } from "react";
-import { Link } from "react-router-dom";
-import useOnlineStatus from "./utils/useOnlineStatus";
-import UserContext from "./UserContext";
-import { useSelector} from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "./utils/firebase";
+import error from "./Error";
+import { useSelector } from "react-redux";
+import { USER_ICON_URL,LOGO } from "./utils/constants";
 
 const Header = () => {
-    const[btnNameReact,setbtnNamereact] =useState("Login");
-    const onlineStatus=useOnlineStatus();
-    const {loggedInUser} =useContext(UserContext);
-    const cartItems= useSelector((store) => store.cart.items);
-    console.log(cartItems);
-
-
+    const navigate= useNavigate();
+    const user =useSelector((store) => store.user);
+    const handleLogout = () => {
+        signOut(auth).then(() => {
+            navigate("/");
+        }).catch((error) => {
+            navigate("/error");
+        });
+    };
     return (
-        <div className="flex justify-between bg-pink-100">
-            <img className="w-[150]" src={CDN_URL}/>
-             <div className="nav-container ">
-                <ul className="flex m-4 p-4 text-lg items-center">
-                    <li className="px-4">OnlineStatus:{onlineStatus ? "✅": "🔴"}</li>
-                    <li className="px-4"><Link to="/">Home</Link></li>
-                    <li className="px-4"><Link to="/about">About Us</Link></li>
-                    <li className="px-4"><Link to="/contact">Contact Us</Link></li>
-                    <li className="px-4"><Link to="/grocery">Grocery</Link></li>
-                    <li className="px-4 font-bold text-lg"><Link to="/cart">Cart - ({cartItems.length} items)</Link></li>
-                    <button className="px-1"
-                    onClick={() => {
-                        btnNameReact === "Login" ? setbtnNamereact("Logout") :setbtnNamereact("Login");
-                    }} 
-                    >{btnNameReact}</button>
-                    <li className="font-bold">{loggedInUser}</li>
-                </ul>
-            </div> 
-        </div>
+         <div className="absolute w-screen bg-linear-to-b from-black z-10 flex justify-between px-5">
+           <img 
+            className="w-48"
+            src={LOGO}
+            alt="app-logo" />
+            {user && <div className="flex py-0.5">
+            <img className="w-12 h-12 mx-1"
+            alt="UserIcon"
+            src={USER_ICON_URL} />
+            <button onClick={handleLogout} className="bg-red-500 w-20 h-10 rounded-lg cursor-pointer text-white">Sign Out</button>
+            </div>}
+         </div>
     )
 }
 

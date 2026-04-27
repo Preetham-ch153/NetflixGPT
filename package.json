@@ -1,5 +1,5 @@
 {
-  "name": "namaste-react",
+  "name": "netflix-gpt",
   "version": "1.0.0",
   "description": "This is Namste React By Preetham",
   "keywords": [
@@ -21,19 +21,29 @@
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html",
-    "test": "jest"
+    "test": "jest",
+    "watch-test": "jest --watch"
   },
   "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.2",
+    "@babel/preset-react": "^7.28.5",
     "@tailwindcss/postcss": "^4.2.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.27",
+    "babel-jest": "^30.3.0",
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0",
     "parcel": "^2.16.4",
     "postcss": "^8.5.9",
     "tailwindcss": "^4.2.2"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
+    "firebase": "^12.12.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-redux": "^9.2.0",
